@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:09:04 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/05 22:39:41 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/05/06 00:44:30 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@ void	init_mlx(t_game *cub)
 
 void	images_init(t_game *cub)
 {
-	cub->NO = mlx_xpm_file_to_image(cub->mlx, "textures/N.xpm", &cub->width, &cub->height); // remplacer les chemins par les chemins dans la map
-	cub->SO = mlx_xpm_file_to_image(cub->mlx, "textures/S.xpm", &cub->width, &cub->height);
-	cub->WE = mlx_xpm_file_to_image(cub->mlx, "textures/W.xpm", &cub->width, &cub->height);
-	cub->EA = mlx_xpm_file_to_image(cub->mlx, "textures/E.xpm", &cub->width, &cub->height);
+	cub->NO = mlx_xpm_file_to_image(cub->mlx, "textures/N.xpm", &cub->width,
+			&cub->height); // remplacer les chemins par les chemins dans la map
+	cub->SO = mlx_xpm_file_to_image(cub->mlx, "textures/S.xpm", &cub->width,
+			&cub->height);
+	cub->WE = mlx_xpm_file_to_image(cub->mlx, "textures/W.xpm", &cub->width,
+			&cub->height);
+	cub->EA = mlx_xpm_file_to_image(cub->mlx, "textures/E.xpm", &cub->width,
+			&cub->height);
 	if (!(cub->NO || !cub->SO || !cub->WE || !cub->EA))
 		exit_prog(cub, IMAGE);
 }
@@ -48,15 +52,19 @@ void	print_tab(char **tab)
 		printf("%s\n", tab[i++]);
 }
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av)
 {
 	t_game	cub;
+	t_data	data;
 
 	if (ac == 2)
 	{
-		ft_check_arg(&cub, av[1], ".cub", env);
+		valid_extension(av[1]);
+		init(&data, av[1]);
+		parsing(&data);
+		// ft_check_arg(&cub, av[1], ".cub", env);
 		init_prog(&cub);
-		get_setup_test(&cub, av[1]);
+		// get_setup_test(&cub, av[1]);
 		init_mlx(&cub);
 		// print_tab(cub.setup);
 		mlx_key_hook(cub.mlx_win, &touche, NULL);

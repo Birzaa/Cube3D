@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/05 13:59:01 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/05/06 00:52:10 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,24 @@ typedef struct s_game
 	t_path			*path;
 }					t_game;
 
+typedef struct s_data
+{
+	int				fd;
+	char			*file;
+	char			**map;
+	char			*n_path;
+	char			*e_path;
+	char			*s_path;
+	char			*o_path;
+}					t_data;
+
 // functions/init.c
-void				ft_check_arg(t_game *cub, char *map, char *exten,
-						char **env);
 void				init_prog(t_game *cub);
+void				init(t_data *data, char *file);
+
+// Parsing
+void				parsing(t_data *data);
+void				valid_extension(char *str);
 
 //	exit.c
 void				exit_prog(t_game *cub, char *error);

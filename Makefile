@@ -1,37 +1,71 @@
-# Colors
-GREEN = \033[0;32m
-RED = \033[0;31m
-YELLOW = \033[0;33m
-CYAN = \033[1;36m
-MAGENTA = \033[0;35m
-ORANGE = \033[38;5;216m
-NC = \033[0m
+# **************************************************************************** #
+#                                   Color                                      #
+# **************************************************************************** #
 
-# Flags
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I/usr/include -I./minilibx-linux -O3
-LDFLAGS = -L./minilibx-linux -L/usr/lib
-LDLIBS = -lmlx_Linux -lXext -lX11 -lm -lz
+GREEN			= 	\033[0;32m
+RED				= 	\033[0;31m
+YELLOW 			= 	\033[0;33m
+CYAN 			=	\033[1;36m
+MAGENTA			= 	\033[0;35m
+ORANGE 			= 	\033[38;5;216m
+NC 				= 	\033[0m
 
-# Project
-NAME = cub3d
-HEADER_DIR = ./includes/
-OBJ_DIR = objects/
-SRC_DIR = functions/
-EXIT_DIR = functions/exit/
-INIT_DIR = functions/init/
-TOOL_DIR = functions/tools/
-SRC = 	$(SRC_DIR)main.c \
-		$(INIT_DIR)check_arg.c \
-		$(INIT_DIR)init.c \
-		$(EXIT_DIR)exit.c \
-		$(TOOL_DIR)free_tab.c \
-		$(TOOL_DIR)test.c \
+# **************************************************************************** #
+#                                   Flag                                       #
+# **************************************************************************** #
 
-OBJS = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
+CC 				= 	cc
+CFLAGS 			=	-Wall -Wextra -Werror -I/usr/include -I./minilibx-linux -O3
+LDFLAGS 		= 	-L./minilibx-linux -L/usr/lib
+LDLIBS 			= 	-lmlx_Linux -lXext -lX11 -lm -lz
 
-#Libft
+# **************************************************************************** #
+#                                   Project                                    #
+# **************************************************************************** #
+
+NAME 			= 	cub3d
+HEADER_DIR 		= 	./includes/
+OBJ_DIR 		= 	.objects/
+SRC_DIR 		= 	functions/
+
+#-------Main-------
+SRC 			= 	$(addprefix $(SRC_DIR),$(addsuffix .c, \
+						main \
+						))
+
+#-------INIT-------
+SRC 			+= 	$(addprefix $(SRC_DIR)init/,$(addsuffix .c, \
+						init \
+						))
+
+#-------Parsing----
+SRC 			+= 	$(addprefix $(SRC_DIR)parsing/,$(addsuffix .c, \
+						check_arg \
+						parsing \
+						))
+
+#-------EXIT-------
+SRC 			+= 	$(addprefix $(SRC_DIR)exit/,$(addsuffix .c, \
+						$(EXIT_DIR)exit \
+						))
+
+#-------TOOLS------
+SRC 			+= 	$(addprefix $(SRC_DIR)tools/,$(addsuffix .c, \
+						free_tab \
+						))
+
+OBJS 			= 	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
+DEPS 			= 	$(OBJS:.o=.d)
+
+# **************************************************************************** #
+#                                   Libft                                      #
+# **************************************************************************** #
+
 LIBFT_A = ./libft/libft.a
+
+# **************************************************************************** #
+#                                   Rules                                      #
+# **************************************************************************** #
 
 all: $(NAME)
 
@@ -75,5 +109,7 @@ fclean: clean
 	@echo "${YELLOW}Complete cleaning completed${NC}"
 
 re: fclean all
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re

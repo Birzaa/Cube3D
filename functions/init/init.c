@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:24:18 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/05 13:27:16 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/05/06 00:44:14 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,10 @@ void	init_prog(t_game *cub)
 	cub->WE = NULL;
 	cub->EA = NULL;
 	cub->path = NULL;
+}
+
+void	init(t_data *data, char *file)
+{
+	ft_memset(data, 0, sizeof(t_data));
+	data->file = file;
 }
