@@ -77,7 +77,7 @@ OBJS = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
 
 # FLAGS
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR)
+CFLAGS = -Wall -Wextra -Werror -g3 -I$(HEADER_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(@D)

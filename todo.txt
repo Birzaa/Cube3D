@@ -1,0 +1,6 @@
+#############################################
+Parsing :
+Convertir toutes les verifications actuelles,
+qui sont faite dans la ligne actuelle de GNL, par une verification dans la map
+==> Permet de tej les still reach de GNL;
+##############################################

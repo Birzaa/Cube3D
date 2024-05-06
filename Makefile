@@ -15,7 +15,7 @@ NC 				= 	\033[0m
 # **************************************************************************** #
 
 CC 				= 	cc
-CFLAGS 			=	-Wall -Wextra -Werror -I/usr/include -I./minilibx-linux -O3
+CFLAGS 			=	-Wall -Wextra -Werror -g3 -I/usr/include -I./minilibx-linux -O3
 LDFLAGS 		= 	-L./minilibx-linux -L/usr/lib
 LDLIBS 			= 	-lmlx_Linux -lXext -lX11 -lm -lz
 
@@ -42,11 +42,19 @@ SRC 			+= 	$(addprefix $(SRC_DIR)init/,$(addsuffix .c, \
 SRC 			+= 	$(addprefix $(SRC_DIR)parsing/,$(addsuffix .c, \
 						check_arg \
 						parsing \
+						parsing_line \
+						parsing_map \
+						))
+
+#-------Render-----
+SRC 			+= 	$(addprefix $(SRC_DIR)render/,$(addsuffix .c, \
+						window \
+						raycasting \
 						))
 
 #-------EXIT-------
 SRC 			+= 	$(addprefix $(SRC_DIR)exit/,$(addsuffix .c, \
-						$(EXIT_DIR)exit \
+						exit \
 						))
 
 #-------TOOLS------

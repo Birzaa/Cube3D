@@ -6,28 +6,38 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:24:18 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/06 00:44:14 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/06 22:14:59 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_prog(t_game *cub)
-{
-	cub->mlx = NULL;
-	cub->mlx_win = NULL;
-	cub->setup = NULL;
-	cub->map = NULL;
-	cub->fd = 0;
-	cub->NO = NULL;
-	cub->SO = NULL;
-	cub->WE = NULL;
-	cub->EA = NULL;
-	cub->path = NULL;
-}
-
 void	init(t_data *data, char *file)
 {
 	ft_memset(data, 0, sizeof(t_data));
+	data->mlx = mlx_init();
+	if (!data->mlx)
+	{
+		ft_putstr_fd("Incorrect initialization", 2);
+		exit(1);
+	}
 	data->file = file;
+	data->nb_line = -1;
+}
+
+void	init_window(t_data *data)
+{
+	data->mlx_win = mlx_new_window(data->mlx, data->map_width * data->img_width,
+			(data->map_height) * data->img_height, "cube3D");
+	if (!data->mlx_win)
+	{
+		exit_prog(data, "Incorrect initialization\n");
+	}
+}
+
+void	init_player(t_data *data)
+{
+	data->player.x = data->start_x;
+	data->player.y = data->start_y;
+	data->player.angle = 0.0;
 }

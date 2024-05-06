@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/06 00:52:10 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/06 22:24:32 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -33,6 +34,7 @@
 # define MLX "init mlx\n"
 # define MAP "Invalid map\n"
 # define IMAGE "Init image\n"
+# define M_PI 3.14159265358979323846
 
 typedef struct s_path
 {
@@ -60,27 +62,76 @@ typedef struct s_game
 	t_path			*path;
 }					t_game;
 
+typedef struct s_player
+{
+	int				x;
+	int				y;
+	double			angle;
+}					t_player;
+
+typedef struct s_raycast
+{
+	double			rayAngle;
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
+	double			distance;
+	bool			hitWall;
+}					t_ray;
+
+typedef struct s_color
+{
+	int				r;
+	int				g;
+	int				b;
+}					t_color;
+
 typedef struct s_data
 {
 	int				fd;
+	int				start_x;
+	int				start_y;
+	int				nb_start;
+	int				map_height;
+	int				map_width;
 	char			*file;
 	char			**map;
-	char			*n_path;
-	char			*e_path;
-	char			*s_path;
-	char			*o_path;
+	int				nb_line;
+	int				map_start_line;
+	void			*mlx;
+	void			*mlx_win;
+	int				img_width;
+	int				img_height;
+	void			*n_path;
+	void			*e_path;
+	void			*s_path;
+	void			*o_path;
+	t_color			floor;
+	t_color			ceiling;
+	t_player		player;
+	t_ray			ray;
 }					t_data;
 
 // functions/init.c
-void				init_prog(t_game *cub);
 void				init(t_data *data, char *file);
+void				init_window(t_data *data);
+void				init_player(t_data *data);
 
 // Parsing
 void				parsing(t_data *data);
 void				valid_extension(char *str);
+void				parsing_texture(t_data *data, char *str);
+void				parse_map(t_data *data, char *line, int i);
+void				get_start_position(t_data *data);
+
+// Render
+void				render_window(t_data data);
+void				castRays(t_data *data);
 
 //	exit.c
-void				exit_prog(t_game *cub, char *error);
+void				exit_prog(t_data *cub, char *error);
+int					exit_game(t_data *data);
 
 // functions/tools
 void				free_tab(char **tab);
