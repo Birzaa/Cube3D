@@ -1,0 +1,20 @@
+# custom files
+custom/
+
+# temp files directories
+cache/
+log/
+*.swp
+.DS_Store
+
+# editor configs
+.idea
+a.out
+*.o
+*.so
+*.a
+main
+pushswap
+.vscode
+cube3d
+.objects/
