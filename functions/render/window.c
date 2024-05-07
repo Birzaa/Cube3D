@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenwood <thenwood@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 21:02:59 by thomas            #+#    #+#             */
-/*   Updated: 2024/05/06 22:29:12 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/07 16:32:11 by thenwood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	render_window(t_data data)
 {
 	mlx_key_hook(data.mlx_win, NULL, &data);
 	mlx_hook(data.mlx_win, 17, 0, &exit_game, &data);
+	mlx_key_hook(data.mlx_win, &key_pressed, &data);
 	castRays(&data);
 	mlx_loop(data.mlx);
 }

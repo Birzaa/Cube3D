@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenwood <thenwood@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/06 22:24:32 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/07 16:29:46 by thenwood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void				get_start_position(t_data *data);
 // Render
 void				render_window(t_data data);
 void				castRays(t_data *data);
+int					key_pressed(int keycode, t_data *data);
 
 //	exit.c
 void				exit_prog(t_data *cub, char *error);

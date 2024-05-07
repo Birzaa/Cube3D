@@ -3,4 +3,7 @@ Parsing :
 Convertir toutes les verifications actuelles,
 qui sont faite dans la ligne actuelle de GNL, par une verification dans la map
 ==> Permet de tej les still reach de GNL;
++ rajouter que y'a une couleur
++ fix la largeur de la map qui pu la merde, car y'a des lignes + grandes que dautres
++ si au final y'a pas la conversion, penser a close le fd si y'a une erreur
 ##############################################

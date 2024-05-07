@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenwood <thenwood@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:24:18 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/06 22:14:59 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/07 15:33:33 by thenwood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	init(t_data *data, char *file)
 
 void	init_window(t_data *data)
 {
-	data->mlx_win = mlx_new_window(data->mlx, data->map_width * data->img_width,
-			(data->map_height) * data->img_height, "cube3D");
+	data->mlx_win = mlx_new_window(data->mlx, 1280,
+			720, "cube3D");
 	if (!data->mlx_win)
 	{
 		exit_prog(data, "Incorrect initialization\n");

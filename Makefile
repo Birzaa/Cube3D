@@ -50,6 +50,7 @@ SRC 			+= 	$(addprefix $(SRC_DIR)parsing/,$(addsuffix .c, \
 SRC 			+= 	$(addprefix $(SRC_DIR)render/,$(addsuffix .c, \
 						window \
 						raycasting \
+						movement \
 						))
 
 #-------EXIT-------

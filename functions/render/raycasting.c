@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenwood <thenwood@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:15:14 by thomas            #+#    #+#             */
-/*   Updated: 2024/05/06 22:58:56 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/07 16:07:04 by thenwood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	draw_wall(t_data *data, int x, double distance)
+{
+	int		wall_top;
+	int		wall_bottom;
+	double	wall_height;
+
+	// Hauteur du mur dans la projection
+	wall_height = (50) / distance;
+	
+	wall_top = (data->map_height - wall_height) / 2;
+	wall_bottom = wall_top + wall_height;
+	for (int y = wall_top; y < wall_bottom; y++)
+	{
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->e_path, x
+			* data->img_width, y * data->img_height);
+	}
+}
 
 void	castRays(t_data *data)
 {
@@ -51,8 +69,7 @@ void	castRays(t_data *data)
 		}
 		if (data->ray.hitWall)
 		{
-			mlx_put_image_to_window(data->mlx, data->mlx_win, data->e_path,
-				testX * data->img_width, testY * data->img_height);
+			draw_wall(data, ray, data->ray.distance);
 		}
 		ray++;
 	}
