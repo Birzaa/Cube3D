@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thenwood <thenwood@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:15:14 by thomas            #+#    #+#             */
-/*   Updated: 2024/05/07 16:07:04 by thenwood         ###   ########.fr       */
+/*   Updated: 2024/05/07 18:42:53 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw_wall(t_data *data, int x, double distance)
 	double	wall_height;
 
 	// Hauteur du mur dans la projection
-	wall_height = (50) / distance;
+	wall_height = 30/ distance;
 	
 	wall_top = (data->map_height - wall_height) / 2;
 	wall_bottom = wall_top + wall_height;
@@ -62,7 +62,6 @@ void	castRays(t_data *data)
 			}
 			else
 			{
-				// Sortir de la boucle si les coordonnées sortent des limites de la carte
 				break ;
 			}
 			data->ray.distance += 0.1;
