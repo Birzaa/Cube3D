@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/07 21:48:28 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/08 14:27:21 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,16 @@ typedef struct s_game
 	t_path			*path;
 }					t_game;
 
-typedef struct s_player
-{
-	double				x;
-	double				y;
-	double			angle;
-}					t_player;
-
 typedef struct s_raycast
 {
-	double			rayAngle;
 	double			posX;
 	double			posY;
 	double			dirX;
 	double			dirY;
-	double			distance;
-	bool			hitWall;
+	double			planeX;
+	double			planeY;
+	double			time;
+	double			oldTime;
 }					t_ray;
 
 typedef struct s_color
@@ -90,8 +84,6 @@ typedef struct s_color
 typedef struct s_data
 {
 	int				fd;
-	int				start_x;
-	int				start_y;
 	int				nb_start;
 	int				map_height;
 	int				map_width;
@@ -109,14 +101,13 @@ typedef struct s_data
 	void			*o_path;
 	t_color			floor;
 	t_color			ceiling;
-	t_player		player;
 	t_ray			ray;
 }					t_data;
 
 // functions/init.c
 void				init(t_data *data, char *file);
 void				init_window(t_data *data);
-void				init_player(t_data *data);
+void				init_raycast(t_ray *ray);
 
 // Parsing
 void				parsing(t_data *data);
@@ -129,6 +120,7 @@ void				get_start_position(t_data *data);
 void				render_window(t_data data);
 void				castRays(t_data *data);
 int					key_pressed(int keycode, t_data *data);
+void				draw_map(t_data *data);
 
 //	exit.c
 void				exit_prog(t_data *cub, char *error);

@@ -11,5 +11,8 @@ qui sont faite dans la ligne actuelle de GNL, par une verification dans la map
 ##############################################
 
 
-
+###############################################
+Tuto raycasting : 
 https://permadi.com/1996/05/ray-casting-tutorial-7/
+https://lodev.org/cgtutor/raycasting.html#Untextured_Raycaster_
+###############################################

@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:09:04 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/06 22:53:41 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/08 14:27:49 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int ac, char **av)
 		valid_extension(av[1]);
 		init(&data, av[1]);
 		parsing(&data);
+		init_raycast(&data.ray);
 		init_window(&data);
-		init_player(&data);
 		render_window(data);
 	}
 	else

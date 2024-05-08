@@ -6,13 +6,13 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:24:53 by thenwood          #+#    #+#             */
-/*   Updated: 2024/05/07 20:49:22 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/08 14:21:47 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	left_right(t_data *data, int value)
+/* void	left_right(t_data *data, int value)
 {
 	if (data->map[data->player.y][data->player.x += value] != '1')
 	{
@@ -28,14 +28,14 @@ void	up_down(t_data *data, int value)
 		data->player.y += value;
 		castRays(data);
 	}
-}
+} */
 
 int	key_pressed(int keycode, t_data *data)
 {
 	(void)data;
 	if (keycode == 65307)
 		exit(0); // FREE TOUUUUUUUUUUUUUUUUT
-	else if (keycode == 119 || keycode == 65362)
+	/* else if (keycode == 119 || keycode == 65362)
 	{
 		up_down(data, -1);
 	}
@@ -50,6 +50,6 @@ int	key_pressed(int keycode, t_data *data)
 	else if (keycode == 115 || keycode == 65364)
 	{
 		up_down(data, 1);
-	}
+	} */
 	return (0);
 }

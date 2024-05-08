@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:24:18 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/07 21:48:50 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/08 14:26:35 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ void	init_window(t_data *data)
 	}
 }
 
-void	init_player(t_data *data)
+void	init_raycast(t_ray *ray)
 {
-	data->player.x = (data->start_x) / 2;
-	data->player.y = (data->start_y) / 2;
-	data->player.angle = 0.0;
+	ray->dirX = -1;
+	ray->dirY = 0;
+	ray->planeX = 0;
+	ray->planeY = 0.66;
+	ray->time = 0;
+	ray->oldTime = 0;
 }
