@@ -6,13 +6,9 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:15:14 by thomas            #+#    #+#             */
-/*   Updated: 2024/05/08 14:19:26 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/09 14:20:03 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	castRays(t_data *data)
-{
-	(void)data;
-}

@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/08 14:27:21 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/09 14:21:41 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,9 @@ typedef struct s_game
 
 typedef struct s_raycast
 {
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
-	double			time;
-	double			oldTime;
+	double			posx;
+	double			posy;
+	char			start;
 }					t_ray;
 
 typedef struct s_color
@@ -83,10 +78,14 @@ typedef struct s_color
 
 typedef struct s_data
 {
+	int				rx;
+	int				ry;
 	int				fd;
 	int				nb_start;
 	int				map_height;
 	int				map_width;
+	int				screenx;
+	int				screeny;
 	char			*file;
 	char			**map;
 	int				nb_line;
@@ -107,7 +106,6 @@ typedef struct s_data
 // functions/init.c
 void				init(t_data *data, char *file);
 void				init_window(t_data *data);
-void				init_raycast(t_ray *ray);
 
 // Parsing
 void				parsing(t_data *data);
@@ -118,7 +116,6 @@ void				get_start_position(t_data *data);
 
 // Render
 void				render_window(t_data data);
-void				castRays(t_data *data);
 int					key_pressed(int keycode, t_data *data);
 void				draw_map(t_data *data);
 
@@ -128,8 +125,5 @@ int					exit_game(t_data *data);
 
 // functions/tools
 void				free_tab(char **tab);
-
-// test.c
-void				get_setup_test(t_game *cub, char *map);
 
 #endif

@@ -6,11 +6,12 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 21:02:59 by thomas            #+#    #+#             */
-/*   Updated: 2024/05/08 14:13:14 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/09 14:20:33 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 void	render_window(t_data data)
 {

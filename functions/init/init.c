@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:24:18 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/08 14:26:35 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/09 14:20:23 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,4 @@ void	init_window(t_data *data)
 	{
 		exit_prog(data, "Incorrect initialization\n");
 	}
-}
-
-void	init_raycast(t_ray *ray)
-{
-	ray->dirX = -1;
-	ray->dirY = 0;
-	ray->planeX = 0;
-	ray->planeY = 0.66;
-	ray->time = 0;
-	ray->oldTime = 0;
 }
