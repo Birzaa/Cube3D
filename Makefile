@@ -36,7 +36,6 @@ SRC 			= 	$(addprefix $(SRC_DIR),$(addsuffix .c, \
 #-------INIT-------
 SRC 			+= 	$(addprefix $(SRC_DIR)init/,$(addsuffix .c, \
 						init \
-						raycast \
 						))
 
 #-------Parsing----

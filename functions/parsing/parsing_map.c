@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:33:57 by thomas            #+#    #+#             */
-/*   Updated: 2024/05/08 19:56:43 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/11 13:32:14 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ void	get_start_position(t_data *data)
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
 				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
 			{
-				data->ray.start = data->map[i][j];
-				data->ray.posx = (double)j + 0.5;
-				data->ray.posy = (double)i + 0.5;
+				data->ray.direction = data->map[i][j];
+				data->ray.posx = j;
+				data->ray.posy = i;
+			
 			}
 			j++;
 		}

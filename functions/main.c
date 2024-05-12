@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:09:04 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/09 14:20:41 by thomas           ###   ########.fr       */
+/*   Updated: 2024/05/11 15:17:42 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	main(int ac, char **av)
 		init(&data, av[1]);
 		parsing(&data);
 		init_window(&data);
-		render_window(data);
+		init_game(&data);
+		init_ray(&data);
+		render_window(&data);
 	}
 	else
 		exit_prog(NULL, ARG);
