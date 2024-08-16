@@ -8,4 +8,7 @@ Parsing :
 + Pas de ligne vide dans la map
 + Pas de map
 + vérifier que y'a que un joueur et que une image par texture
+
+
++ Tester tous les cas de parsing vérifier pas de leaks
 ##############################################
