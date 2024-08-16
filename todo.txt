@@ -10,5 +10,5 @@ Parsing :
 + vérifier que y'a que un joueur et que une image par texture
 
 
-+ Tester tous les cas de parsing vérifier pas de leaks
++ Tester tous les cas de parsing vérifier pas de leaks + FD
 ##############################################
