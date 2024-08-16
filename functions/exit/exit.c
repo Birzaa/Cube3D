@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:16:12 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/06 21:13:11 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/16 12:00:53 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	exit_game(t_data *data)
 		mlx_destroy_image(data->mlx, data->e_path);
 	if (data->map)
 		free_tab(data->map);
+	mlx_destroy_image(data->mlx, data->mlx_img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);

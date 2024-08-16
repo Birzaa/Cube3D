@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:24:53 by thenwood          #+#    #+#             */
-/*   Updated: 2024/05/11 15:16:33 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/16 11:57:39 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,83 @@
 
 void move(t_data *data, int value)
 {
-    double newX = data->ray.posx + cos(data->ray.angle) * value;
-    double newY = data->ray.posy + sin(data->ray.angle) * value;
+    double moveSpeed = 0.04 * value;
+    double buffer = 0.1; // Taille du buffer pour empêcher la caméra de rentrer dans le mur
+    
+    double newX = data->ray.posx + data->ray.dirx * moveSpeed;
+    double newY = data->ray.posy + data->ray.diry * moveSpeed;
 
-    // Vérifier s'il y a une collision avec un mur
-    if (data->map[(int)newY][(int)newX] != '1')
+    // Vérification des collisions avec le mur en prenant en compte la marge de sécurité (buffer)
+    if (data->map[(int)(newY + data->ray.diry * buffer)][(int)(newX + data->ray.dirx * buffer)] != '1' &&
+        data->map[(int)(newY - data->ray.diry * buffer)][(int)(newX - data->ray.dirx * buffer)] != '1' &&
+        data->map[(int)(newY + data->ray.diry * buffer)][(int)(newX - data->ray.dirx * buffer)] != '1' &&
+        data->map[(int)(newY - data->ray.diry * buffer)][(int)(newX + data->ray.dirx * buffer)] != '1')
     {
-        // Si aucune collision n'est détectée, déplacer le joueur
         data->ray.posx = newX;
         data->ray.posy = newY;
     }
 }
 
-void	update_angle(t_data *data, double value)
+
+void update_angle(t_data *data, double value)
 {
-	data->ray.angle += value;
-	
-	// angle reste dans la plage [0, 2*PI]
-	if (data->ray.angle >= 2 * M_PI)
-		data->ray.angle -= 2 * M_PI;
-	else if (data->ray.angle < 0)
-		data->ray.angle += 2 * M_PI;
+    data->ray.angle += value;
+
+    // Keep angle within the range [0, 2*PI]
+    if (data->ray.angle >= 2 * M_PI)
+        data->ray.angle -= 2 * M_PI;
+    else if (data->ray.angle < 0)
+        data->ray.angle += 2 * M_PI;
+
+    // Update the direction vector based on the new angle
+    data->ray.dirx = cos(data->ray.angle);
+    data->ray.diry = sin(data->ray.angle);
+
+    // Update the camera plane (perpendicular to the direction vector)
+    data->ray.plane_x = -0.66 * sin(data->ray.angle);
+    data->ray.plane_y = 0.66 * cos(data->ray.angle);
+	// printf("Angle : %f, posx : %f, posy : %f\n", data->ray.angle, data->ray.posx, data->ray.posy);
 }
+
 
 int	key_pressed(int keycode, t_data *data)
 {
-	(void)data;
-	if (keycode == 65307)
-		exit(0); // FREE TOUUUUUUUUUUUUUUUUT
-	else if (keycode == 100 || keycode == 65363)
-	{
-		update_angle(data, 0.1);
-		castRays(data);
-	}
-	else if (keycode == 97 || keycode == 65361)
-	{
-		update_angle(data, -0.1);
-		castRays(data);
-	}
-	else if (keycode == 119 || keycode == 65362)
-	{
-		move(data, 1);
-		castRays(data);
-	}
-	else if (keycode == 115 || keycode == 65364)
-	{
-		move(data, -1);
-		castRays(data);
-	}
-		
-	return (0);
+    if (keycode == KEY_ESC)
+        exit_game(data);
+    else if (keycode == KEY_D || keycode == KEY_RIGHT)
+        data->keys.right = 1;
+    else if (keycode == KEY_A || keycode == KEY_LEFT)
+        data->keys.left = 1;
+    else if (keycode == KEY_W || keycode == KEY_UP)
+        data->keys.forward = 1;
+    else if (keycode == KEY_S || keycode == KEY_DOWN)
+        data->keys.backward = 1;
+    return (0);
+}
+
+int	key_released(int keycode, t_data *data)
+{
+    if (keycode == KEY_D || keycode == KEY_RIGHT)
+        data->keys.right = 0;
+    else if (keycode == KEY_A || keycode == KEY_LEFT)
+        data->keys.left = 0;
+    else if (keycode == KEY_W || keycode == KEY_UP)
+        data->keys.forward = 0;
+    else if (keycode == KEY_S || keycode == KEY_DOWN)
+        data->keys.backward = 0;
+    return (0);
+}
+
+void update(t_data *data)
+{
+    if (data->keys.forward)
+        move(data, 1);
+    if (data->keys.backward)
+        move(data, -1);
+    if (data->keys.left)
+        update_angle(data, -0.035);
+    if (data->keys.right)
+        update_angle(data, 0.035);
+
+    castRays(data);
 }

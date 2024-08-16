@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:24:18 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/12 20:57:01 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/16 11:59:53 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,39 +42,55 @@ void	init_window(t_data *data)
 			&data->img_no_len, &data->img_no_endian);
 }
 
-void	init_game(t_data *data)
+void init_game(t_data *data)
 {
-	if (data->ray.direction == 'N')
-	{
-		data->ray.plane_x = 0.66;
-		data->ray.plane_y = 0;
-		data->ray.dirx = 0;
-		data->ray.diry = -1;
-	}
-	if (data->ray.direction == 'S')
-	{
-		data->ray.plane_x = -0.66;
-		data->ray.plane_y = 0;
-		data->ray.dirx = 0;
-		data->ray.diry = 1;
-	}
-	if (data->ray.direction == 'W')
-	{
-		data->ray.plane_x = 0;
-		data->ray.plane_y = 0.66;
-		data->ray.dirx = -1;
-		data->ray.diry = 0;
-	}
-	if (data->ray.direction == 'E')
-	{
-		data->ray.plane_x = 0;
-		data->ray.plane_y = -0.66;
-		data->ray.dirx = 1;
-		data->ray.diry = 0;
-	}
+    if (data->ray.direction == 'N')
+    {
+        data->ray.dirx = 0;
+        data->ray.diry = -1;
+        data->ray.plane_x = 0.66;
+        data->ray.plane_y = 0;
+    }
+    else if (data->ray.direction == 'S')
+    {
+        data->ray.dirx = 0;
+        data->ray.diry = 1;
+        data->ray.plane_x = -0.66;
+        data->ray.plane_y = 0;
+    }
+    else if (data->ray.direction == 'W')
+    {
+        data->ray.dirx = -1;
+        data->ray.diry = 0;
+        data->ray.plane_x = 0;
+        data->ray.plane_y = -0.66;
+    }
+    else if (data->ray.direction == 'E')
+    {
+        data->ray.dirx = 1;
+        data->ray.diry = 0;
+        data->ray.plane_x = 0;
+        data->ray.plane_y = 0.66;
+    }
 }
 
-void	init_ray(t_data *data)
+void init_ray(t_data *data)
 {
-	data->ray.angle = 0;
+    if (data->ray.direction == 'N')
+        data->ray.angle = M_PI / 2; // 90 degrees
+    else if (data->ray.direction == 'S')
+        data->ray.angle = 3 * M_PI / 2; // 270 degrees
+    else if (data->ray.direction == 'W')
+        data->ray.angle = M_PI; // 180 degrees
+    else if (data->ray.direction == 'E')
+        data->ray.angle = 0; // 0 degrees
+
+    // Update the direction vector based on the new angle
+    data->ray.dirx = cos(data->ray.angle);
+    data->ray.diry = sin(data->ray.angle);
+
+    // Update the camera plane (perpendicular to the direction vector)
+    data->ray.plane_x = -0.66 * sin(data->ray.angle);
+    data->ray.plane_y = 0.66 * cos(data->ray.angle);
 }
+

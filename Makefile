@@ -51,7 +51,6 @@ SRC 			+= 	$(addprefix $(SRC_DIR)render/,$(addsuffix .c, \
 						window \
 						raycasting \
 						movement \
-						render_map \
 						))
 
 #-------EXIT-------
