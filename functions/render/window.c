@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 21:02:59 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/16 11:55:50 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/21 21:22:34 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main_loop(t_data *data)
 void	render_window(t_data *data)
 {
 	mlx_hook(data->mlx_win, 17, 0, exit_game, data);
-	mlx_hook(data->mlx_win, 2, 1L << 0, key_pressed, data);  // Key press
-	mlx_hook(data->mlx_win, 3, 1L << 1, key_released, data); // Key release
-	mlx_loop_hook(data->mlx, main_loop, data);               // Main loop
+	mlx_hook(data->mlx_win, 2, 1L << 0, key_pressed, data);
+	mlx_hook(data->mlx_win, 3, 1L << 1, key_released, data);
+	mlx_loop_hook(data->mlx, main_loop, data);
 	mlx_loop(data->mlx);
 }

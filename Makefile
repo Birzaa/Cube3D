@@ -23,7 +23,7 @@ LDLIBS 			= 	-lmlx_Linux -lXext -lX11 -lm -lz
 #                                   Project                                    #
 # **************************************************************************** #
 
-NAME 			= 	cub3d
+NAME 			= 	Cub3D
 HEADER_DIR 		= 	./includes/
 OBJ_DIR 		= 	.objects/
 SRC_DIR 		= 	functions/
@@ -50,6 +50,8 @@ SRC 			+= 	$(addprefix $(SRC_DIR)parsing/,$(addsuffix .c, \
 SRC 			+= 	$(addprefix $(SRC_DIR)render/,$(addsuffix .c, \
 						window \
 						raycasting \
+						raycast2 \
+						raycast3 \
 						movement \
 						))
 
