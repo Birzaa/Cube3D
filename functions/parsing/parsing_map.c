@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:33:57 by thomas            #+#    #+#             */
-/*   Updated: 2024/05/11 13:32:14 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/21 17:53:05 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ void	get_start_position(t_data *data)
 				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
 			{
 				data->ray.direction = data->map[i][j];
-				data->ray.posx = j;
-				data->ray.posy = i;
-			
+				data->ray.posx = j+0.5;
+				data->ray.posy = i+0.5;
 			}
 			j++;
 		}
