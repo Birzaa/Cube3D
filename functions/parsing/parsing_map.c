@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:33:57 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/21 17:53:05 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:09:06 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*skip_space(char *str)
 
 void	parse_map(t_data *data, char *line, int j)
 {
+	printf("test\n");
 	int	i;
 
 	i = 0;
@@ -28,6 +29,12 @@ void	parse_map(t_data *data, char *line, int j)
 	data->nb_line++;
 	if (!*line)
 		return ;
+	/* if (!data->n_path || !data->s_path || !data->e_path || !data->o_path)
+	{
+		printf("test\n");
+		empty_gnl(data, line);
+		exit_prog(data, "Error Texture\n");
+	} */
 	if (!data->map_start_line)
 		data->map_start_line = j;
 	if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
@@ -36,13 +43,13 @@ void	parse_map(t_data *data, char *line, int j)
 	}
 	while (line[i])
 	{
-		if (line[i] == 'N' && line[i] == 'S' && line[i] == 'E'
-			&& line[i] == 'W')
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
+			|| line[i] == 'W')
 			data->nb_start++;
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S'
+		else if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
 		{
-			(free(line), exit_prog(data, "Impossible value\n"));
+			(free(line), exit_prog(data, "Impossible value\n")); // faut vider gnl, peut pas faire ca
 		}
 		i++;
 	}
@@ -64,8 +71,8 @@ void	get_start_position(t_data *data)
 				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
 			{
 				data->ray.direction = data->map[i][j];
-				data->ray.posx = j+0.5;
-				data->ray.posy = i+0.5;
+				data->ray.posx = j + 0.5;
+				data->ray.posy = i + 0.5;
 			}
 			j++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:18:04 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/16 11:49:35 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/22 17:57:35 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,28 @@ void	parse_color_floor(t_data *data, char *line)
 	}
 }
 
+void	empty_gnl(t_data *data, char *line)
+{
+	char *empty = "";
+	free(line);
+	while (1)
+	{
+		empty = get_next_line(data->fd);
+		if (!empty)
+			break;
+		free(empty);
+	}
+	exit_prog(data, "Error parsing\n");
+}
+
 void	parsing_texture(t_data *data, char *line)
 {
 	char	*path;
 
 	path = ft_strchr(line, '.');
-	if (!ft_strncmp(line, "NO ", 3))
+	if (!path)
+		return;
+	else if (!ft_strncmp(line, "NO ", 3))
 		data->n_path = mlx_xpm_file_to_image(data->mlx, path, &data->img_width,
 				&data->img_height);
 	else if (!ft_strncmp(line, "EA ", 3))

@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/20 22:05:41 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:54:08 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,9 @@ void	parse_line(t_data *data, char *line, int i)
 		free(line);
 		exit_prog(data, "Path already registered\n");
 	}
-	if (!ft_strncmp(line, "NO ", 3))
-		parsing_texture(data, line);
-	else if (!ft_strncmp(line, "EA ", 3))
-		parsing_texture(data, line);
-	else if (!ft_strncmp(line, "SO ", 3))
-		parsing_texture(data, line);
-	else if (!ft_strncmp(line, "WE ", 3))
-		parsing_texture(data, line);
-	else if (!ft_strncmp(line, "F ", 2))
-		parsing_texture(data, line);
-	else if (!ft_strncmp(line, "C ", 2))
+	else if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "EA ", 3)
+		|| !ft_strncmp(line, "SO ", 3) || !ft_strncmp(line, "WE ", 3)
+		|| !ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 		parsing_texture(data, line);
 	else
 		parse_map(data, line, i);
@@ -89,7 +81,7 @@ void	create_map(t_data *data)
 	i = 0;
 	data->map = malloc(sizeof(char *) * (data->nb_line + 1));
 	if (!data->map)
-		exit(1); // MODIF
+		exit_prog(data, "Error malloc\n");
 	while (1)
 	{
 		line = get_next_line(data->fd);
@@ -107,10 +99,13 @@ void	create_map(t_data *data)
 		exit_prog(data, "Impossible to close FD\n");
 }
 
-int		find_longest_line(char **map)
+int	find_longest_line(char **map)
 {
-	int i = 0;
-	int len = 0;
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
 	while (map[i])
 	{
 		if ((int)ft_strlen(map[i]) > len)
@@ -122,9 +117,11 @@ int		find_longest_line(char **map)
 
 void	copy_new_map(t_data *data, char **new_map)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
+	i = 0;
+	j = 0;
 	while (i < data->map_height)
 	{
 		j = 0;
@@ -132,7 +129,7 @@ void	copy_new_map(t_data *data, char **new_map)
 		{
 			if (j < (int)ft_strlen(data->map[i]))
 			{
-				if ((unsigned char)data->map[i][j] != '\t' && (unsigned char)data->map[i][j] != ' ')
+				if ((unsigned char)data->map[i][j] != ' ')
 					new_map[i][j] = data->map[i][j];
 				else
 					new_map[i][j] = '1';
@@ -148,11 +145,12 @@ void	copy_new_map(t_data *data, char **new_map)
 
 void	optimizing_map(t_data *data)
 {
-	int i = 0;
-	char **new_map = NULL;
+	int		i;
+	char	**new_map;
+
+	i = 0;
+	new_map = NULL;
 	data->map_width = find_longest_line(data->map);
-	// printf("%d\n", data->map_width); 
-	// printf("%d\n", data->map_height);
 	new_map = malloc(sizeof(char *) * (data->map_height + 1));
 	if (!new_map)
 		exit_prog(data, "Malloc failed\n");
