@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/22 18:10:26 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:04:27 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	open_fd(t_data *data)
 	data->fd = open(data->file, O_RDONLY);
 	if (data->fd == -1)
 	{
-		exit_prog(data, "Can't open the file\n");
+		exit_prog(data, "Can't open the file\n", NULL);
 	}
 }
 
@@ -27,17 +27,25 @@ void	parse_line(t_data *data, char *line, int i)
 				"EA ", 3) && data->e_path) || (!ft_strncmp(line, "SO ", 3)
 			&& data->s_path) || (!ft_strncmp(line, "WE ", 3) && data->o_path))
 	{
-		free(line);
-		exit_prog(data, "Path already registered\n");
+		exit_prog(data, "Path already registered\n", line);
 	}
 	else if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "EA ", 3)
 		|| !ft_strncmp(line, "SO ", 3) || !ft_strncmp(line, "WE ", 3)
 		|| !ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
+	{
 		parsing_texture(data, line);
-	else
+	}
+	else if (data->e_path && data->n_path && data->o_path && data->s_path)
+	{
+		printf("on a les textures, on peut parser la map\n");
 		parse_map(data, line, i);
+	}
+	else
+	{
+		return ;
+	}
 	if (data->nb_start > 1)
-		(free(line), exit_prog(data, "Too much start position\n"));
+		exit_prog(data, "Too much start position\n", line);
 }
 
 void	parsing_map(t_data *data)
@@ -52,11 +60,12 @@ void	parsing_map(t_data *data)
 		i++;
 		if (!line)
 			break ;
+		printf("line : %s\n", line);
 		parse_line(data, line, i);
 		free(line);
 	}
 	if (close(data->fd) < 0)
-		exit_prog(data, "Impossible to close FD\n");
+		exit_prog(data, "Impossible to close FD\n", line);
 }
 
 void	print_tab(char **tab)
@@ -81,7 +90,7 @@ void	create_map(t_data *data)
 	i = 0;
 	data->map = malloc(sizeof(char *) * (data->nb_line + 1));
 	if (!data->map)
-		exit_prog(data, "Error malloc\n");
+		exit_prog(data, "Error malloc\n", NULL);
 	while (1)
 	{
 		line = get_next_line(data->fd);
@@ -96,7 +105,7 @@ void	create_map(t_data *data)
 	data->map_height = i;
 	data->map_width = ft_strlen(data->map[0]) - 1;
 	if (close(data->fd) < 0)
-		exit_prog(data, "Impossible to close FD\n");
+		exit_prog(data, "Impossible to close FD\n", line);
 }
 
 int	find_longest_line(char **map)
@@ -153,18 +162,19 @@ void	optimizing_map(t_data *data)
 	data->map_width = find_longest_line(data->map);
 	new_map = malloc(sizeof(char *) * (data->map_height + 1));
 	if (!new_map)
-		exit_prog(data, "Malloc failed\n");
+		exit_prog(data, "Malloc failed\n", NULL);
 	while (i < data->map_height)
 	{
 		new_map[i] = malloc(sizeof(char) * (data->map_width + 1));
 		if (!new_map[i])
-			exit_prog(data, "Malloc failed\n");
+			exit_prog(data, "Malloc failed\n", NULL);
 		i++;
 	}
 	copy_new_map(data, new_map);
 	free_tab(data->map);
 	data->map = new_map;
-	// print_tab(data->map);
+	print_tab(data->map);
+	printf("nb of lines new map : %d", data->nb_line);
 }
 
 void	parsing(t_data *data)

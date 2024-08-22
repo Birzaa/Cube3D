@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:09:04 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/22 17:58:48 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:30:23 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 		if (!data.e_path || !data.n_path || !data.o_path || !data.s_path)
 		{
 			ft_printf("%d\n", data.nb_line);
-			exit_prog(&data, "capart\n");
+			exit_prog(&data, "TEST ERROR\n", NULL);
 		}
 		init_window(&data);
 		init_game(&data);
@@ -32,5 +32,5 @@ int	main(int ac, char **av)
 		render_window(&data);
 	}
 	else
-		exit_prog(NULL, ARG);
+		exit_prog(NULL, ARG, NULL);
 }

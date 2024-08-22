@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/22 18:10:37 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:06:54 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct s_data
 	char	*file;
 	char	**map;
 	int		nb_line;
+	int		parsed;
 	int		map_start_line;
 	void	*mlx;
 	void	*mlx_win;
@@ -199,7 +200,7 @@ void	create_img(t_data *data);
 
 
 //	exit.c
-void		exit_prog(t_data *cub, char *error);
+void		exit_prog(t_data *cub, char *error, char *line);
 int			exit_game(t_data *data);
 
 // functions/tools

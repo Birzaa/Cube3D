@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:24:18 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/16 11:59:53 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/22 19:21:01 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	init_window(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx, 1280, 720, "cube3D");
 	if (!data->mlx_win)
 	{
-		exit_prog(data, "Incorrect initialization\n");
+		exit_prog(data, "Incorrect initialization\n", NULL);
 			/// bien free tout meme truc apres
 	}
 	data->mlx_img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!data->mlx_img)
-		exit_prog(data, "Error mlx img\n"); // tout free
+		exit_prog(data, "Error mlx img\n", NULL); // tout free
 	data->img_add = mlx_get_data_addr(data->mlx_img, &data->img_bpp,
 			&data->img_len, &data->img_endian);
 	data->img_no_add = mlx_get_data_addr(data->mlx_img, &data->img_no_bpp,

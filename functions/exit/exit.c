@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:16:12 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/16 12:00:53 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/22 19:19:26 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ int	exit_game(t_data *data)
 	exit(0);
 }
 
-void	exit_prog(t_data *data, char *error)
+void	exit_prog(t_data *data, char *error, char *line)
 {
 	if (error)
 	{
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd(error, 2);
+	}
+	if (line)
+	{
+		empty_gnl(data, line);
 	}
 	if (data)
 	{
