@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/22 14:45:32 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:10:37 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,44 @@ typedef struct s_keys
     int right;      // Pour la touche 'D' ou flèche droite
 } t_keys;
 
+typedef struct s_ray_var
+{
+	int	bpp;
+	int	size_line;
+	int	endian;
+	int	floor_color;
+	int	ceiling_color;
+	int	x;
+	int	y;
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	int mapX;
+	int mapY;
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	double perpWallDist;
+	int stepX;
+	int stepY;
+	int hit;
+	int side;
+	int lineHeight;
+	int drawStart;
+	int drawEnd;
+	void *texture;
+	char *texture_data;
+	int tex_width;
+	int tex_height;
+	double wallX;
+	int texX;
+	int d;
+	int texY;
+	int color;
+} t_ray_var;
+
+
 typedef struct s_data
 {
 	int		map_x;
@@ -119,6 +157,7 @@ typedef struct s_data
 	t_ray	ray;
 	t_img	img;
 	t_keys keys;      // Structure pour l'état des touches
+	t_ray_var	ray_var;
 }			t_data;
 
 // functions/init.c
@@ -142,7 +181,22 @@ int			key_pressed(int keycode, t_data *data);
 void		draw_map(t_data *data);
 
 // Raycasting
-void		castRays(t_data *data);
+void		init_render(t_data *data);
+void	distance_wall(t_data *data);
+void	hit_wall(t_data *data);
+void	get_value_draw_wall(t_data *data);
+void	texture_wall_position_side(t_data *data);
+void	draw_wall(t_data *data, int col);
+int	create_trgb(int t, int r, int g, int b);
+void	draw_pixel(t_data *data,char *img_data, int x, int y);
+void	create_img(t_data *data);
+void	draw_ceiling(t_data *data);
+void	draw_floor(t_data *data);
+void	get_value_ray(t_data *data, int col);
+void	raycast(t_data *data);
+int	create_trgb(int t, int r, int g, int b);
+void	create_img(t_data *data);
+
 
 //	exit.c
 void		exit_prog(t_data *cub, char *error);

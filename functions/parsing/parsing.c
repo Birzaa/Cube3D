@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/22 17:54:08 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:10:26 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	optimizing_map(t_data *data)
 	copy_new_map(data, new_map);
 	free_tab(data->map);
 	data->map = new_map;
-	print_tab(data->map);
+	// print_tab(data->map);
 }
 
 void	parsing(t_data *data)
