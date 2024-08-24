@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/22 20:06:54 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/23 22:09:58 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ typedef struct s_data
 	char	*file;
 	char	**map;
 	int		nb_line;
-	int		parsed;
+	int		in_map;
+	double	parsed;
 	int		map_start_line;
 	void	*mlx;
 	void	*mlx_win;
@@ -167,13 +168,33 @@ void		init_window(t_data *data);
 void		init_game(t_data *data);
 void		init_ray(t_data *data);
 
-// Parsing
-void		parsing(t_data *data);
+
+// optimizing_map.c
+
+void	optimizing_map(t_data *data);
+
+// parsing.c
+
+void	parsing(t_data *data);
+
+
+// parsing_line.c
+
+int	check_comma(char *line);
+char	**valid_color(char *line);
+void	parse_color_ceiling(t_data *data, char *line);
+void	parse_color_floor(t_data *data, char *line);
+void	parsing_color(t_data *data, char *line);
+void	parsing_texture(t_data *data, char *line);
+
+
 void		valid_extension(char *str);
+int	check_comma(char *line);
+
 void		parsing_texture(t_data *data, char *str);
 void		parse_map(t_data *data, char *line, int i);
 void		get_start_position(t_data *data);
-void		empty_gnl(t_data *data, char *line);
+void	parsing_color(t_data *data, char *line);
 
 
 // Render
@@ -205,6 +226,9 @@ int			exit_game(t_data *data);
 
 // functions/tools
 void		free_tab(char **tab);
+void	empty_gnl(t_data *data, char *line);
+void	print_tab(char **tab);
+
 
 // Movements
 int	key_released(int keycode, t_data *data);

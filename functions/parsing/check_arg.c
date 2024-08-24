@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:09:14 by abougrai          #+#    #+#             */
-/*   Updated: 2024/05/06 22:04:28 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/24 18:54:35 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,26 @@ void	valid_extension(char *str)
 		ft_putstr("Error\nInvalid arg\n");
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	check_comma(char *line)
+{
+	int	i;
+	int	comma;
+
+	i = 0;
+	comma = 0;
+	if (!ft_isdigit(line[i]))
+		return (1);
+	while (line[i])
+	{
+		if (line[i] == ',' && line[i + 1] && ft_isdigit(line[i + 1]))
+			comma++;
+		if (!ft_isdigit(line[i]) && line[i] != ',')
+			return (1);
+		i++;
+	}
+	if (comma == 2)
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:33:57 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/22 20:33:14 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:25:23 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,17 @@ void	parse_map(t_data *data, char *line, int j)
 		return ;
 	if (!data->map_start_line)
 		data->map_start_line = j;
-	/* if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
-	{
-		printf("nb of lines : %d\n", data->nb_line);
+	if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
 		exit_prog(data, "Invalid border\n", line);
-	} */
 	while (line[i])
 	{
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
 			|| line[i] == 'W')
 			data->nb_start++;
-		else if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S'
-			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
-		{
+		else if (line[i] != '0' && line[i] != '1' && line[i] != 'N'
+			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W'
+			&& line[i] != ' ')
 			exit_prog(data, "Impossible value\n", line);
-		}
 		i++;
 	}
 }

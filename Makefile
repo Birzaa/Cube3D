@@ -44,6 +44,7 @@ SRC 			+= 	$(addprefix $(SRC_DIR)parsing/,$(addsuffix .c, \
 						parsing \
 						parsing_line \
 						parsing_map \
+						optimizing_map \
 						))
 
 #-------Render-----

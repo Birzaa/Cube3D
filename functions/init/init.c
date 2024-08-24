@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:24:18 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/22 19:21:01 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:27:13 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	init_window(t_data *data)
 	if (!data->mlx_win)
 	{
 		exit_prog(data, "Incorrect initialization\n", NULL);
-			/// bien free tout meme truc apres
 	}
 	data->mlx_img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!data->mlx_img)
