@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/24 19:43:48 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:42:33 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	parsing(t_data *data)
 	parsing_map(data);
 	open_fd(data);
 	create_map(data);
+	check_closed_map(data);
 	optimizing_map(data);
 	get_start_position(data);
 }

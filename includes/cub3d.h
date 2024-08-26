@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/23 22:09:58 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:42:22 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,9 @@ void		parsing_texture(t_data *data, char *str);
 void		parse_map(t_data *data, char *line, int i);
 void		get_start_position(t_data *data);
 void	parsing_color(t_data *data, char *line);
+
+int check_closed_map(data);
+
 
 
 // Render
