@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/27 16:43:56 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:56:06 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,8 @@ void	parsing(t_data *data);
 
 
 // parsing_line.c
+
+int	ft_parsing_map_leak(t_data *data, int x, int y);
 
 int	check_comma(char *line);
 char	**valid_color(char *line);

@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/27 16:25:06 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:45:26 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	parsing(t_data *data)
 	parsing_map(data);
 	open_fd(data);
 	create_map(data);
+	print_tab(data->map);
+	chec
 	optimizing_map(data);
 	if (check_border(data->map))
 		exit_prog(data, "Error map\n", NULL);

@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:09:14 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/24 18:54:35 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:58:08 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,31 @@ int	check_comma(char *line)
 	}
 	if (comma == 2)
 		return (0);
+	return (1);
+}
+
+int	ft_parsing_map_leak(t_data *data, int x, int y)
+{
+	if (data->map.content[y][x] == '0' \
+		|| ft_contains_char("NSWE", data->map.content[y][x]))
+	{
+		if (x == 0 || x == data->map.size.x - 1 || y == 0 \
+			|| y == data->map.size.y - 1)
+			return (ft_exit(data, ERR_MAP, "Map is not surrounded by 1"));
+		if (data->map.content[y][x + 1] == '\0'
+			|| data->map.content[y][x - 1] == '\0'
+			|| data->map.content[y + 1][x] == '\0'
+			|| data->map.content[y - 1][x] == '\0')
+			return (ft_exit(data, ERR_MAP, "Map is not surrounded by 1"));
+		if (data->map.content[y][x + 1] == ' '
+			|| data->map.content[y][x - 1] == ' '
+			|| data->map.content[y + 1][x] == ' '
+			|| data->map.content[y - 1][x] == ' ')
+			return (ft_exit(data, ERR_MAP, "Map is not surrounded by 1"));
+	}
+	if (x < data->map.size.x - 1 && data->map.content[y][x + 1] != '\0')
+		return (ft_parsing_map_leak(data, x + 1, y));
+	else if (y < data->map.size.y - 1 && data->map.content[y + 1] != NULL)
+		return (ft_parsing_map_leak(data, 0, y + 1));
 	return (1);
 }
