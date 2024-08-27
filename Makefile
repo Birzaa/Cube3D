@@ -23,7 +23,7 @@ LDLIBS 			= 	-lmlx_Linux -lXext -lX11 -lm -lz
 #                                   Project                                    #
 # **************************************************************************** #
 
-NAME 			= 	Cub3D
+NAME 			= 	cub3D
 HEADER_DIR 		= 	./includes/
 OBJ_DIR 		= 	.objects/
 SRC_DIR 		= 	functions/
@@ -44,6 +44,7 @@ SRC 			+= 	$(addprefix $(SRC_DIR)parsing/,$(addsuffix .c, \
 						parsing \
 						parsing_line \
 						parsing_map \
+						check_closed_map \
 						optimizing_map \
 						))
 

@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 21:16:33 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/25 05:39:41 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:20:06 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	optimizing_map(t_data *data)
 	free_tab(data->map);
 	data->map = new_map;
 	print_tab(data->map);
-	if (check_border(data->map) || check_pos(data->map))
+	if (check_pos(data->map))
 		exit_prog(data, "Error map\n", NULL);
 	printf("nb of lines new map : %d", data->nb_line);
 }
