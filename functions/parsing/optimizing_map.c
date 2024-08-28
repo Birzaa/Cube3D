@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 21:16:33 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/27 16:20:06 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/28 23:21:07 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,9 @@ void	optimizing_map(t_data *data)
 
 	i = 0;
 	new_map = NULL;
+
 	data->map_width = find_longest_line(data->map);
+	printf("map width : %d\n", data->map_width);
 	new_map = malloc(sizeof(char *) * (data->map_height + 1));
 	if (!new_map)
 		exit_prog(data, "Malloc failed\n", NULL);

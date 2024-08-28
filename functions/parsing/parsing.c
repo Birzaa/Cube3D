@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/27 17:45:26 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/28 23:23:15 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,38 @@ void	create_map(t_data *data)
 		exit_prog(data, "Impossible to close FD\n", line);
 }
 
+char **cpy_map(char **actual_map, int map_height, int map_width)
+{
+    char **cpy_map;
+    int i;
+
+    // Allouer de la mémoire pour les lignes de la carte copiée
+    cpy_map = (char **)malloc(sizeof(char *) * map_height);
+    if (cpy_map == NULL)
+    {
+        perror("Failed to allocate memory for copied map");
+        exit(EXIT_FAILURE);
+    }
+
+    // Copier chaque ligne de la carte originale
+    for (i = 0; i < map_height; i++)
+    {
+        cpy_map[i] = (char *)malloc(sizeof(char) * (map_width + 1)); // +1 pour le caractère nul de fin
+        if (cpy_map[i] == NULL)
+        {
+            perror("Failed to allocate memory for a line of copied map");
+            // Libérer la mémoire allouée jusqu'à présent en cas d'erreur
+            while (i > 0)
+                free(cpy_map[--i]);
+            free(cpy_map);
+            exit(EXIT_FAILURE);
+        }
+        strcpy(cpy_map[i], actual_map[i]);
+    }
+
+    return cpy_map;
+}
+
 void	parsing(t_data *data)
 {
 	open_fd(data);
@@ -100,7 +132,11 @@ void	parsing(t_data *data)
 	open_fd(data);
 	create_map(data);
 	print_tab(data->map);
-	chec
+	data->map_width = find_longest_line(data->map);
+	printf("map height : %d\n", data->map_height);
+	printf("map width : %d\n", data->map_width);
+	if (ft_parsing_map_leak(data, 0, 0))
+		exit_prog(data, "Map is not closed\n", NULL);
 	optimizing_map(data);
 	if (check_border(data->map))
 		exit_prog(data, "Error map\n", NULL);

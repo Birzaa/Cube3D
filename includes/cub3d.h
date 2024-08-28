@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/27 17:56:06 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/28 23:22:40 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
+#include <string.h>
 
 # define ARG "Invalid argument\n"
 # define ACCESS "Impossible acess to arg\n"
@@ -141,6 +142,7 @@ typedef struct s_data
 	int		map_width;
 	char	*file;
 	char	**map;
+	char **cpy_map;
 	int		nb_line;
 	int		in_map;
 	double	parsed;
@@ -177,13 +179,14 @@ void		init_ray(t_data *data);
 void	optimizing_map(t_data *data);
 
 // parsing.c
+int	find_longest_line(char **map);
 
 void	parsing(t_data *data);
 
 
 // parsing_line.c
 
-int	ft_parsing_map_leak(t_data *data, int x, int y);
+int ft_parsing_map_leak(t_data *data, int x, int y);
 
 int	check_comma(char *line);
 char	**valid_color(char *line);
