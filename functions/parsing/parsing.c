@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/29 03:11:29 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/29 03:43:08 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	open_fd(t_data *data)
 {
 	data->fd = open(data->file, O_RDONLY);
 	if (data->fd == -1)
-	{
 		exit_prog(data, "Can't open the file\n", NULL);
-	}
 }
 
 void	parse_line(t_data *data, char *line, int i)
@@ -121,36 +119,12 @@ char	**cpy_map(t_data *data, char **actual_map, int map_height)
 
 void	parsing(t_data *data)
 {
-	int	i;
-	int	j;
-
 	open_fd(data);
 	parsing_map(data);
 	open_fd(data);
 	create_map(data);
-	i = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			printf("[%c]", data->map[i][j]);
-			j++;
-		}
-			if (!data->map[i][j])
-				printf("test");
-		printf("\n");
-		i++;
-	}
-	if (!data->map[i])
-		printf("capart");
-	print_tab(data->map);
-	printf("%d\n", data->map_width);
-	printf("%d\n", data->map_height);
 	if (ft_parsing_map_leak(data, 0, 0))
-		exit_prog(data, "Map is not closed\n", NULL);
-	optimizing_map(data);
-	if (check_border(data->map))
 		exit_prog(data, "Error map\n", NULL);
+	optimizing_map(data);
 	get_start_position(data);
 }
