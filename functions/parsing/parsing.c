@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/28 23:23:15 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/29 03:11:29 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	parsing_map(t_data *data)
 		exit_prog(data, "Impossible to close FD\n", line);
 }
 
+
 void	create_map(t_data *data)
 {
 	char	*line;
@@ -88,53 +89,64 @@ void	create_map(t_data *data)
 	}
 	data->map[i] = NULL;
 	data->map_height = i;
-	data->map_width = ft_strlen(data->map[0]) - 1;
+	data->map_width = find_longest_line(data->map);
 	if (close(data->fd) < 0)
 		exit_prog(data, "Impossible to close FD\n", line);
 }
 
-char **cpy_map(char **actual_map, int map_height, int map_width)
+char	**cpy_map(t_data *data, char **actual_map, int map_height)
 {
-    char **cpy_map;
-    int i;
+	char	**cpy_map;
+	int		i;
 
-    // Allouer de la mémoire pour les lignes de la carte copiée
-    cpy_map = (char **)malloc(sizeof(char *) * map_height);
-    if (cpy_map == NULL)
-    {
-        perror("Failed to allocate memory for copied map");
-        exit(EXIT_FAILURE);
-    }
-
-    // Copier chaque ligne de la carte originale
-    for (i = 0; i < map_height; i++)
-    {
-        cpy_map[i] = (char *)malloc(sizeof(char) * (map_width + 1)); // +1 pour le caractère nul de fin
-        if (cpy_map[i] == NULL)
-        {
-            perror("Failed to allocate memory for a line of copied map");
-            // Libérer la mémoire allouée jusqu'à présent en cas d'erreur
-            while (i > 0)
-                free(cpy_map[--i]);
-            free(cpy_map);
-            exit(EXIT_FAILURE);
-        }
-        strcpy(cpy_map[i], actual_map[i]);
-    }
-
-    return cpy_map;
+	cpy_map = NULL;
+	i = 0;
+	cpy_map = malloc(sizeof(char *) * (map_height + 1));
+	if (!cpy_map)
+		exit_prog(data, "Error malloc\n", NULL);
+	while (actual_map[i])
+	{
+		cpy_map[i] = ft_strdup(actual_map[i]);
+		if (!cpy_map[i])
+		{
+			free_tab(cpy_map);
+			exit_prog(data, "Error malloc\n", NULL);
+		}
+		i++;
+	}
+	cpy_map[i] = NULL;
+	return (cpy_map);
 }
+
 
 void	parsing(t_data *data)
 {
+	int	i;
+	int	j;
+
 	open_fd(data);
 	parsing_map(data);
 	open_fd(data);
 	create_map(data);
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			printf("[%c]", data->map[i][j]);
+			j++;
+		}
+			if (!data->map[i][j])
+				printf("test");
+		printf("\n");
+		i++;
+	}
+	if (!data->map[i])
+		printf("capart");
 	print_tab(data->map);
-	data->map_width = find_longest_line(data->map);
-	printf("map height : %d\n", data->map_height);
-	printf("map width : %d\n", data->map_width);
+	printf("%d\n", data->map_width);
+	printf("%d\n", data->map_height);
 	if (ft_parsing_map_leak(data, 0, 0))
 		exit_prog(data, "Map is not closed\n", NULL);
 	optimizing_map(data);

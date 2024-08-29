@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 23:09:14 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/28 23:10:42 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/29 03:18:40 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,40 +79,30 @@ int ft_contains_char(char *str, char c)
 	return (ft_find_char(str, c) != -1);
 }
 
-int ft_parsing_map_leak(t_data *data, int x, int y)
+
+
+int	ft_parsing_map_leak(t_data *data, int x, int y)
 {
-    // Vérifier si la cellule actuelle est '0' ou un des caractères 'NSWE'
-    if (data->map[y][x] == '0' || ft_contains_char("NSWE", data->map[y][x]))
-    {
-        // Vérifier les bords de la carte
-        if (x == 0 || x == data->map_width - 1 || y == 0 || y == data->map_height - 1)
-        {
-            // Erreur : la carte n'est pas entourée de '1'
-            return 1;
-        }
-        // Vérifier les voisins immédiats pour '\0' ou espaces ' '
-        if (data->map[y][x + 1] == '\0' || data->map[y][x - 1] == '\0' ||
-            data->map[y + 1][x] == '\0' || data->map[y - 1][x] == '\0')
-        {
-            // Erreur : la carte n'est pas entourée de '1'
-            return 1;
-        }
-        if (data->map[y][x + 1] == ' ' || data->map[y][x - 1] == ' ' ||
-            data->map[y + 1][x] == ' ' || data->map[y - 1][x] == ' ')
-        {
-            // Erreur : la carte n'est pas entourée de '1'
-            return 1;
-        }
-    }
-
-    // Continuer à parcourir la carte
-    if (x < data->map_width - 1)
-        return ft_parsing_map_leak(data, x + 1, y);
-    else if (y < data->map_height - 1)
-        return ft_parsing_map_leak(data, 0, y + 1);
-
-    // Si tout est correct et aucune fuite n'a été trouvée
-    return 0;
+	if (data->map[y][x] == '0' \
+		|| ft_contains_char("NSWE", data->map[y][x]))
+	{
+		if (x == 0 || x == data->map_width - 1 || y == 0 \
+			|| y == data->map_height- 1)
+			return (1);
+		if (data->map[y][x + 1] == '\0'
+			|| data->map[y][x - 1] == '\0'
+			|| data->map[y + 1][x] == '\0'
+			|| data->map[y - 1][x] == '\0')
+			return (1);
+		if (data->map[y][x + 1] == ' '
+			|| data->map[y][x - 1] == ' '
+			|| data->map[y + 1][x] == ' '
+			|| data->map[y - 1][x] == ' ')
+			return (1);
+	}
+	if (x < data->map_width- 1 && data->map[y][x + 1] != '\0')
+		return (ft_parsing_map_leak(data, x + 1, y));
+	else if (y < data->map_height- 1 && data->map[y + 1] != NULL)
+		return (ft_parsing_map_leak(data, 0, y + 1));
+	return (0);
 }
-
-
