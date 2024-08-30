@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:45:47 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/21 22:41:30 by thomas           ###   ########.fr       */
+/*   Updated: 2024/08/30 13:27:46 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ void	draw_floor(t_data *data)
 
 void	get_value_ray(t_data *data, int col)
 {
-	data->ray_var.cameraX = 2 * col / (double)SCREEN_WIDTH - 1;
-	data->ray_var.rayDirX = data->ray.dirx + data->ray.plane_x
-		* data->ray_var.cameraX;
-	data->ray_var.rayDirY = data->ray.diry + data->ray.plane_y
-		* data->ray_var.cameraX;
-	data->ray_var.mapX = (int)data->ray.posx;
-	data->ray_var.mapY = (int)data->ray.posy;
-	data->ray_var.deltaDistX = fabs(1 / data->ray_var.rayDirX);
-	data->ray_var.deltaDistY = fabs(1 / data->ray_var.rayDirY);
+	data->ray_var.camera_x = 2 * col / (double)SCREEN_WIDTH - 1;
+	data->ray_var.ray_dir_x = data->ray.dirx + data->ray.plane_x
+		* data->ray_var.camera_x;
+	data->ray_var.ray_dir_y = data->ray.diry + data->ray.plane_y
+		* data->ray_var.camera_x;
+	data->ray_var.map_x = (int)data->ray.posx;
+	data->ray_var.map_y = (int)data->ray.posy;
+	data->ray_var.delta_dist_x = fabs(1 / data->ray_var.ray_dir_x);
+	data->ray_var.delta_dist_y = fabs(1 / data->ray_var.ray_dir_y);
 	data->ray_var.hit = 0;
 }
 

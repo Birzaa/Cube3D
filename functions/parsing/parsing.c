@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:21:41 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/29 03:43:08 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/30 13:07:43 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	parsing_map(t_data *data)
 		exit_prog(data, "Impossible to close FD\n", line);
 }
 
-
 void	create_map(t_data *data)
 {
 	char	*line;
@@ -92,38 +91,13 @@ void	create_map(t_data *data)
 		exit_prog(data, "Impossible to close FD\n", line);
 }
 
-char	**cpy_map(t_data *data, char **actual_map, int map_height)
-{
-	char	**cpy_map;
-	int		i;
-
-	cpy_map = NULL;
-	i = 0;
-	cpy_map = malloc(sizeof(char *) * (map_height + 1));
-	if (!cpy_map)
-		exit_prog(data, "Error malloc\n", NULL);
-	while (actual_map[i])
-	{
-		cpy_map[i] = ft_strdup(actual_map[i]);
-		if (!cpy_map[i])
-		{
-			free_tab(cpy_map);
-			exit_prog(data, "Error malloc\n", NULL);
-		}
-		i++;
-	}
-	cpy_map[i] = NULL;
-	return (cpy_map);
-}
-
-
 void	parsing(t_data *data)
 {
 	open_fd(data);
 	parsing_map(data);
 	open_fd(data);
 	create_map(data);
-	if (ft_parsing_map_leak(data, 0, 0))
+	if (check_border(data, 0, 0))
 		exit_prog(data, "Error map\n", NULL);
 	optimizing_map(data);
 	get_start_position(data);

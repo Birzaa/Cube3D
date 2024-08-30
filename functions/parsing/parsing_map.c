@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:33:57 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/29 02:06:25 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/30 13:05:06 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	parse_map(t_data *data, char *line, int j)
 		return ;
 	if (!data->map_start_line)
 		data->map_start_line = j;
-/* 	if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
-		exit_prog(data, "Invalid border\n", line); */
 	while (line[i])
 	{
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'

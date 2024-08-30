@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 02:56:06 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/23 22:09:52 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/30 13:04:42 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,25 @@ void	print_tab(char **tab)
 		ft_putstr(tab[i++]);
 		ft_putstr("\n");
 	}
+}
+
+ssize_t	ft_find_char(char *str, char c)
+{
+	ssize_t	index;
+
+	if (!str)
+		return (-1);
+	index = 0;
+	while (str[index])
+	{
+		if (str[index] == c)
+			return (index);
+		index++;
+	}
+	return (-1);
+}
+
+int	ft_contains_char(char *str, char c)
+{
+	return (ft_find_char(str, c) != -1);
 }

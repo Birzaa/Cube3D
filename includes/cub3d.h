@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/28 23:22:40 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/30 13:32:02 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
-#include <string.h>
 
 # define ARG "Invalid argument\n"
 # define ACCESS "Impossible acess to arg\n"
@@ -49,203 +47,179 @@
 
 typedef struct s_raycast
 {
-	double posx; // position joueur
-	double	posy;
-	double	plane_x;
-	double	plane_y;
-	double	angle;
-	double dirx; // direction du rayon
-	double	diry;
-	char direction; // N E S O
-}			t_ray;
+	double		posx;
+	double		posy;
+	double		plane_x;
+	double		plane_y;
+	double		angle;
+	double		dirx;
+	double		diry;
+	char		direction;
+}				t_ray;
 
 typedef struct s_color
 {
-	int		r;
-	int		g;
-	int		b;
-}			t_color;
+	int			r;
+	int			g;
+	int			b;
+}				t_color;
 
 typedef struct s_img
 {
-	void *img;          // Pointeur vers l'image
-	char *addr;         // Adresse de l'image en mémoire
-	int bits_per_pixel; // Nombre de bits par pixel
-	int line_length;    // Longueur d'une ligne en octets
-	int endian;         // Endianness de l'image (petit ou grand boutiste)
-}			t_img;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_img;
 
 typedef struct s_keys
 {
-    int forward;    // Pour la touche 'W' ou flèche haut
-    int backward;   // Pour la touche 'S' ou flèche bas
-    int left;       // Pour la touche 'A' ou flèche gauche
-    int right;      // Pour la touche 'D' ou flèche droite
-} t_keys;
+	int			forward;
+	int			backward;
+	int			left;
+	int			right;
+}				t_keys;
 
 typedef struct s_ray_var
 {
-	int	bpp;
-	int	size_line;
-	int	endian;
-	int	floor_color;
-	int	ceiling_color;
-	int	x;
-	int	y;
-	double cameraX;
-	double rayDirX;
-	double rayDirY;
-	int mapX;
-	int mapY;
-	double sideDistX;
-	double sideDistY;
-	double deltaDistX;
-	double deltaDistY;
-	double perpWallDist;
-	int stepX;
-	int stepY;
-	int hit;
-	int side;
-	int lineHeight;
-	int drawStart;
-	int drawEnd;
-	void *texture;
-	char *texture_data;
-	int tex_width;
-	int tex_height;
-	double wallX;
-	int texX;
-	int d;
-	int texY;
-	int color;
-} t_ray_var;
-
+	int			bpp;
+	int			size_line;
+	int			endian;
+	int			floor_color;
+	int			ceiling_color;
+	int			x;
+	int			y;
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	int			map_x;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	void		*texture;
+	char		*texture_data;
+	int			tex_width;
+	int			tex_height;
+	double		wall_x;
+	int			tex_x;
+	int			d;
+	int			tex_y;
+	int			color;
+}				t_ray_var;
 
 typedef struct s_data
 {
-	int		map_x;
-	int		map_y;
-	int		fd;
-	double	dir_x;
-	double	dir_y;
-	void	*mlx_img;
-	void	*img_add;
-	void	*img_no_add;
-	int		img_bpp;
-	int		img_len;
-	int		img_endian;
-	int		img_no_bpp;
-	int		img_no_len;
-	int		img_no_endian;
-	int		nb_start;
-	int		map_height;
-	int		map_width;
-	char	*file;
-	char	**map;
-	char **cpy_map;
-	int		nb_line;
-	int		in_map;
-	double	parsed;
-	int		map_start_line;
-	void	*mlx;
-	void	*mlx_win;
-	int		img_width;
-	int		img_height;
-	void	*n_path;
-	void	*e_path;
-	void	*s_path;
-	void	*o_path;
-	int		rows;
-	int		cols;
-	bool	**visited;
+	int			map_x;
+	int			map_y;
+	int			fd;
+	double		dir_x;
+	double		dir_y;
+	void		*mlx_img;
+	void		*img_add;
+	void		*img_no_add;
+	int			img_bpp;
+	int			img_len;
+	int			img_endian;
+	int			img_no_bpp;
+	int			img_no_len;
+	int			img_no_endian;
+	int			nb_start;
+	int			map_height;
+	int			map_width;
+	char		*file;
+	char		**map;
+	int			nb_line;
+	int			in_map;
+	double		parsed;
+	int			map_start_line;
+	void		*mlx;
+	void		*mlx_win;
+	int			img_width;
+	int			img_height;
+	void		*n_path;
+	void		*e_path;
+	void		*s_path;
+	void		*o_path;
 
-	t_color	floor;
-	t_color	ceiling;
-	t_ray	ray;
-	t_img	img;
-	t_keys keys;      // Structure pour l'état des touches
+	t_color		floor;
+	t_color		ceiling;
+	t_ray		ray;
+	t_img		img;
+	t_keys		keys;
 	t_ray_var	ray_var;
-}			t_data;
+}				t_data;
 
-// functions/init.c
-void		init(t_data *data, char *file);
-void		init_window(t_data *data);
-void		init_game(t_data *data);
-void		init_ray(t_data *data);
+// check_arg.c
+void			valid_extension(char *str);
+int				check_comma(char *line);
 
-
-// optimizing_map.c
-
-void	optimizing_map(t_data *data);
+// init.c
+void			init(t_data *data, char *file);
+void			init_window(t_data *data);
+void			init_game(t_data *data);
+void			init_ray(t_data *data);
 
 // parsing.c
-int	find_longest_line(char **map);
+void			parsing(t_data *data);
+int				find_longest_line(char **map);
 
-void	parsing(t_data *data);
-
+// optimizing_map.c
+void			optimizing_map(t_data *data);
+int				check_border(t_data *data, int x, int y);
 
 // parsing_line.c
-
-int ft_parsing_map_leak(t_data *data, int x, int y);
-
-int	check_comma(char *line);
-char	**valid_color(char *line);
-void	parse_color_ceiling(t_data *data, char *line);
-void	parse_color_floor(t_data *data, char *line);
-void	parsing_color(t_data *data, char *line);
-void	parsing_texture(t_data *data, char *line);
-
-
-void		valid_extension(char *str);
-int	check_comma(char *line);
-
-void		parsing_texture(t_data *data, char *str);
-void		parse_map(t_data *data, char *line, int i);
-void		get_start_position(t_data *data);
-void	parsing_color(t_data *data, char *line);
-
-int check_closed_map(t_data *data);
-int	check_border(char **map);
-
-
+void			parsing_color(t_data *data, char *line);
+void			parsing_texture(t_data *data, char *line);
+void			parse_map(t_data *data, char *line, int i);
+void			get_start_position(t_data *data);
 
 // Render
 
-
-void		render_window(t_data *data);
-int			key_pressed(int keycode, t_data *data);
-void		draw_map(t_data *data);
+void			render_window(t_data *data);
+int				key_pressed(int keycode, t_data *data);
+void			draw_map(t_data *data);
 
 // Raycasting
-void		init_render(t_data *data);
-void	distance_wall(t_data *data);
-void	hit_wall(t_data *data);
-void	get_value_draw_wall(t_data *data);
-void	texture_wall_position_side(t_data *data);
-void	draw_wall(t_data *data, int col);
-int	create_trgb(int t, int r, int g, int b);
-void	draw_pixel(t_data *data,char *img_data, int x, int y);
-void	create_img(t_data *data);
-void	draw_ceiling(t_data *data);
-void	draw_floor(t_data *data);
-void	get_value_ray(t_data *data, int col);
-void	raycast(t_data *data);
-int	create_trgb(int t, int r, int g, int b);
-void	create_img(t_data *data);
-
+void			init_render(t_data *data);
+void			distance_wall(t_data *data);
+void			hit_wall(t_data *data);
+void			get_value_draw_wall(t_data *data);
+void			texture_wall_position_side(t_data *data);
+void			draw_wall(t_data *data, int col);
+int				create_trgb(int t, int r, int g, int b);
+void			draw_pixel(t_data *data, char *img_data, int x, int y);
+void			create_img(t_data *data);
+void			draw_ceiling(t_data *data);
+void			draw_floor(t_data *data);
+void			get_value_ray(t_data *data, int col);
+void			raycast(t_data *data);
+int				create_trgb(int t, int r, int g, int b);
+void			create_img(t_data *data);
 
 //	exit.c
-void		exit_prog(t_data *cub, char *error, char *line);
-int			exit_game(t_data *data);
+void			exit_prog(t_data *cub, char *error, char *line);
+int				exit_game(t_data *data);
 
-// functions/tools
-void		free_tab(char **tab);
-void	empty_gnl(t_data *data, char *line);
-void	print_tab(char **tab);
-
+// free_tab.c
+void			free_tab(char **tab);
+void			empty_gnl(t_data *data, char *line);
+void			print_tab(char **tab);
+ssize_t			ft_find_char(char *str, char c);
+int				ft_contains_char(char *str, char c);
 
 // Movements
-int	key_released(int keycode, t_data *data);
-void update(t_data *data);
+int				key_released(int keycode, t_data *data);
+void			update(t_data *data);
 
 #endif

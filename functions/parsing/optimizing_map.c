@@ -6,34 +6,30 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 21:16:33 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/29 02:19:15 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/08/30 13:08:06 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_border(char **map)
+int	check_border(t_data *data, int x, int y)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (map[i][j])
+	if (data->map[y][x] == '0' || ft_contains_char("NSWE", data->map[y][x]))
 	{
-		if (map[i][j] != '1')
+		if (x == 0 || x == data->map_width - 1 || y == 0
+			|| y == data->map_height - 1)
 			return (1);
-		j++;
-	}
-	while (map[i + 1])
-		i++;
-	j = 0;
-	while (map[i][j])
-	{
-		if (map[i][j] != '1')
+		if (data->map[y][x + 1] == '\0' || data->map[y][x - 1] == '\0'
+			|| data->map[y + 1][x] == '\0' || data->map[y - 1][x] == '\0')
 			return (1);
-		j++;
+		if (data->map[y][x + 1] == ' ' || data->map[y][x - 1] == ' '
+			|| data->map[y + 1][x] == ' ' || data->map[y - 1][x] == ' ')
+			return (1);
 	}
+	if (x < data->map_width - 1 && data->map[y][x + 1] != '\0')
+		return (check_border(data, x + 1, y));
+	else if (y < data->map_height - 1 && data->map[y + 1] != NULL)
+		return (check_border(data, 0, y + 1));
 	return (0);
 }
 
@@ -114,7 +110,6 @@ void	optimizing_map(t_data *data)
 
 	i = 0;
 	new_map = NULL;
-
 	data->map_width = find_longest_line(data->map);
 	new_map = malloc(sizeof(char *) * (data->map_height + 1));
 	if (!new_map)
@@ -129,8 +124,6 @@ void	optimizing_map(t_data *data)
 	copy_new_map(data, new_map);
 	free_tab(data->map);
 	data->map = new_map;
-	print_tab(data->map);
 	if (check_pos(data->map))
 		exit_prog(data, "Error map\n", NULL);
-	printf("nb of lines new map : %d", data->nb_line);
 }
