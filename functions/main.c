@@ -6,27 +6,17 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:09:04 by abougrai          #+#    #+#             */
-/*   Updated: 2024/09/03 16:56:10 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:17:38 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_file(t_data *data)
-{
-	data->fd = open(data->file, __O_DIRECTORY);
-	if (data->fd != -1)
-	{
-		close(data->fd);
-		exit_prog(data, "Error file\n", NULL);
-	}
-}
-
 int	main(int ac, char **av)
 {
-	(void)av;
 	t_data	data;
 
+	(void)av;
 	if (ac == 2)
 	{
 		valid_extension(av[1]);

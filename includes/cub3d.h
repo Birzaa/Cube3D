@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 22:12:22 by abougrai          #+#    #+#             */
-/*   Updated: 2024/08/30 13:32:02 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:17:52 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ typedef struct s_data
 }				t_data;
 
 // check_arg.c
+void			check_file(t_data *data);
 void			valid_extension(char *str);
 int				check_comma(char *line);
 
