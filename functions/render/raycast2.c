@@ -6,7 +6,7 @@
 /*   By: abougrai <abougrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 21:18:52 by thomas            #+#    #+#             */
-/*   Updated: 2024/08/30 13:30:53 by abougrai         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:18:54 by abougrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ void	get_value_draw_wall(t_data *data)
 	if (data->ray_var.side == 1)
 	{
 		if (data->ray_var.ray_dir_y > 0)
-			data->ray_var.texture = data->e_path;
+			data->ray_var.texture = data->n_path;
 		else
-			data->ray_var.texture = data->o_path;
+			data->ray_var.texture = data->s_path;
 	}
 	else
 	{
 		if (data->ray_var.ray_dir_x > 0)
-			data->ray_var.texture = data->s_path;
+			data->ray_var.texture = data->e_path;
 		else
-			data->ray_var.texture = data->n_path;
+			data->ray_var.texture = data->o_path;
 	}
 }
 
